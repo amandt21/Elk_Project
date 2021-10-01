@@ -8,7 +8,7 @@ These files have been tested and used to generate a live ELK deployment on Azure
 
   - _TODO: Enter the playbook file._
   
- Ansible/install-elk.yml
+ (./Ansible/install-elk.yml)
 
  
 
@@ -101,7 +101,7 @@ The playbook implements the following tasks:
 - sudo docker ps
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance. 
 
-![TODO: Update the path with the name of your screenshot of docker ps output]  C:\Users\alexc\Pictures\Screenshots\ELK_docker_ps
+![TODO: Update the path with the name of your screenshot of docker ps output]  (./Images/docker_ps.png)
 
 
 ### Target Machines & Beats
