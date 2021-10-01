@@ -1,13 +1,13 @@
-## Automated ELK Stack Deployment
+﻿## Automated ELK Stack Deployment
 The files in this repository were used to configure the network depicted below.
 
-![TODO: Update the path with the name of your diagram](./Images/Network_diagram.png)
+![TODO: Update the path with the name of your diagram](./Images/Net_Dia.png)
 
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _YAML__ file may be used to install only certain pieces of it, such as Filebeat.
 
   - _TODO: Enter the playbook file._
- 
+
 
 
 This document contains the following details:
@@ -57,18 +57,18 @@ Only the _host/source_ machine can accept connections from the Internet. Access 
 - 10.0.0.9
 - 10.0.0.13
 - 10.1.0.4
-- 75.70.87.43
+- <home IP>
 
 
 Machines within the network can only be accessed by _SSH____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_My Unbuntu VM was used to access my ELK VM and the IP address is 75.70.87.43.
+- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_My Ubuntu VM was used to access my ELK VM and the IP address is my home IP address.
 
 A summary of the access policies in place can be found in the table below.
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Jump Box | No                  |<Home IP> 10.1.0.4    |
+| Web-1    | No                  |<Home IP> 10.0.0.7 10.1.0.4                   | Web-2      No                   <Home IP> 10.0.0.7 10.1.0.4       
+| Web-3    | No                  |<Home IP> 10.0.0.7 10.1.0.4                      | ELK-VM    Yes                   <Home IP> 10.0.0.7 104.40.17.250
 
 
 ### Elk Configuration
@@ -81,18 +81,19 @@ The main advantage of automating configuration with Ansible is that it provides 
 The playbook implements the following tasks:
 - _TODO: In 3-5 bullets, explain the steps of the ELK installation play. 
 
-- Install Docker;
-- Download image;???
-- Attach container.
-- SSH into ELK VM and add ELK VM to Ansible hosts file.
-- Create and add playbook that installs docker and configures the container with a YAML file.
-- Verify configurations in YAML file are correct and playbook.
-- Verify access to Elk VM with SSH.
-- Run docker ps to verify container is attached and running.
+- sudo apt -get update
+- sudo apt install docker.io
+- sudo docker pull cyberxsecurity/ansible
+- sudo docker start cyberxsecurity
+- sudo docker attach inspiring_kare
+- ssh azadmin@10.1.0.4
+- /etc/ansible/hosts- nano hosts- modify hosts file
+- /etc/ansible/install-elk.yml- modify yml file
+- ansible-playbook /etc/ansible/install-elk.yml
+- sudo docker ps
+The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance. 
-
-![TODO: Update the path with the name of your screenshot of docker ps output]  C:\Users\alexc\Pictures\Screenshots\ELK_docker_ps
+![TODO: Update the path with the name of your screenshot of docker ps output](./Images/ELK_docker_ps)
 
 
 ### Target Machines & Beats
@@ -109,8 +110,8 @@ This ELK server is configured to monitor the following machines:
 
 We have installed the following Beats on these machines:
 - _TODO: Specify which Beats you successfully installed_
-- Filebeat
-- Metricbeat
+       - Filebeat
+       - Metricbeat
 
 These Beats allow us to collect the following information from each machine:
 - _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
@@ -125,6 +126,8 @@ SSH into the control node and follow the steps below:
 
 - Copy the _YAML file to _ansible/etc/hosts____.
 - Update the _hosts_ file to include...
+
+
 - Run the playbook, and navigate to ELK VM_ to check that the installation worked as expected.
 
 _TODO: Answer the following questions to fill in the blanks:_
@@ -134,14 +137,14 @@ _TODO: Answer the following questions to fill in the blanks:_
 - _Which file do you update to make Ansible run the playbook on a specific machine? hosts 
 
 How do I specify which machine to install the ELK server on versus which to install Filebeat on? 
-To specify the machine to install the ELK server on, you nano into the etc/ansible/hosts file, nano into the install ELK Configuration file and add remote user’s name.
+To specify the machine to install the ELK server on, nano into the etc/ansible/hosts file, nano into the install ELK Configuration file and add remote user’s name.
 
-To specify for Filebeat, you nano into the etc/ansible/roles file, modify the filebeat-playbook to include all webservers in the container. 
+To specify for Filebeat, nano into the etc/ansible/roles file, modify the filebeat-playbook to include all webservers in the container. 
 
 - _Which URL do you navigate to in order to check that the ELK server is running? http://[your.ELK-VM.External.IP]:5601/app/kibana
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
 
-  
- 
+
+
 
